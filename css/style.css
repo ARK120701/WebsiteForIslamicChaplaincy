@@ -537,7 +537,8 @@ p:last-child { margin-bottom: 0; }
   line-height: 1.4;
   min-width: 60px;
   text-align: center;
-  font-family: 'Segoe UI', serif;
+  font-family: var(--font-arabic);
+  direction: rtl;
 }
 .principle strong { color: var(--green-dark); display: block; margin-bottom: 0.3rem; }
 .principle p { margin: 0; font-size: 0.95rem; }
