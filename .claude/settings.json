@@ -1,0 +1,17 @@
+{
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cd /home/user/WebsiteForIslamicChaplaincy && git add -A && git diff --cached --quiet || (git commit -m \"Auto-save: update website content\" && git push origin main)",
+            "timeout": 30,
+            "statusMessage": "Pushing changes to main..."
+          }
+        ]
+      }
+    ]
+  }
+}
