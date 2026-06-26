@@ -175,11 +175,11 @@ p:last-child { margin-bottom: 0; }
 }
 .btn-outline {
   background: transparent;
-  color: var(--green-dark);
-  border-color: var(--green-mid);
+  color: var(--gold);
+  border-color: var(--gold);
 }
 .btn-outline:hover {
-  background: var(--green-mid);
+  background: var(--gold);
   color: white;
 }
 .btn-outline-light {
