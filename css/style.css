@@ -165,13 +165,13 @@ p:last-child { margin-bottom: 0; }
 }
 .btn-primary {
   background: var(--gold);
-  color: var(--green-dark);
+  color: var(--white);
   border-color: var(--gold);
 }
 .btn-primary:hover {
   background: var(--gold-light);
   border-color: var(--gold-light);
-  color: var(--green-dark);
+  color: var(--white);
 }
 .btn-outline {
   background: transparent;
