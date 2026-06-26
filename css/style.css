@@ -348,25 +348,25 @@ p:last-child { margin-bottom: 0; }
 .two-col-text .btn { margin-top: 1rem; }
 
 .quote-card {
-  background: var(--green-dark);
-  color: white;
+  background: var(--cream);
   border-radius: var(--radius-lg);
   padding: 2.5rem;
   border-left: 5px solid var(--gold);
+  box-shadow: var(--shadow);
 }
 .quote-text {
   font-size: 1.2rem;
   line-height: 1.7;
-  color: rgba(255,255,255,0.92);
+  color: var(--gray-900);
   font-style: italic;
   margin-bottom: 1.25rem;
 }
 .quote-attr {
-  color: var(--gold-light);
+  color: var(--gold);
   font-size: 0.9rem;
   font-weight: 600;
 }
-.quote-attr em { color: rgba(255,255,255,0.55); font-style: normal; }
+.quote-attr em { color: var(--gray-400); font-style: normal; }
 
 /* =====================================================
    Team Preview
