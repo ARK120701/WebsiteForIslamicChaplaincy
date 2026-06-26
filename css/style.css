@@ -714,6 +714,12 @@ p:last-child { margin-bottom: 0; }
   box-shadow: var(--shadow-lg);
 }
 .bio-title-block h2 { font-size: 1.4rem; margin-bottom: 0.25rem; }
+.bio-name-link {
+  color: inherit;
+  border-bottom: 2px solid var(--gold);
+  transition: color var(--transition), border-color var(--transition);
+}
+.bio-name-link:hover { color: var(--gold); }
 .bio-role {
   font-weight: 700;
   color: var(--green-mid);
