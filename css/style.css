@@ -125,7 +125,7 @@ p:last-child { margin-bottom: 0; }
   align-items: center;
 }
 .nav-links a {
-  color: rgba(255,255,255,0.85);
+  color: var(--gray-600);
   font-size: 0.9rem;
   font-weight: 500;
   padding: 0.45rem 0.9rem;
@@ -134,10 +134,10 @@ p:last-child { margin-bottom: 0; }
 }
 .nav-links a:hover,
 .nav-links a.active {
-  background: rgba(255,255,255,0.12);
-  color: var(--white);
+  background: rgba(200,150,62,0.10);
+  color: var(--gold);
 }
-.nav-links a.active { color: var(--gold-light); }
+.nav-links a.active { color: var(--gold); font-weight: 700; }
 
 .nav-toggle {
   display: none;
