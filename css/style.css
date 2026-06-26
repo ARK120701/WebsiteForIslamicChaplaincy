@@ -697,8 +697,8 @@ p:last-child { margin-bottom: 0; }
 .bio-avatar {
   width: 120px;
   height: 120px;
-  background: var(--green-dark);
-  color: var(--gold);
+  background: var(--gold);
+  color: var(--white);
   border-radius: 50%;
   display: flex;
   align-items: center;
