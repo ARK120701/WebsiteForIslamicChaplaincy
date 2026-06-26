@@ -451,8 +451,8 @@ p:last-child { margin-bottom: 0; }
 .stat-box {
   flex: 1;
   min-width: 180px;
-  background: var(--green-dark);
-  color: white;
+  background: var(--cream);
+  border: 2px solid var(--gold);
   border-radius: var(--radius-lg);
   padding: 1.5rem;
   text-align: center;
@@ -463,7 +463,7 @@ p:last-child { margin-bottom: 0; }
   color: var(--gold);
   margin-bottom: 0.5rem;
 }
-.stat-label { font-size: 0.88rem; color: rgba(255,255,255,0.75); }
+.stat-label { font-size: 0.88rem; color: var(--gray-600); }
 
 /* =====================================================
    Chaplaincy — Fields Grid
