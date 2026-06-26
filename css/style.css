@@ -92,11 +92,12 @@ p:last-child { margin-bottom: 0; }
   justify-content: space-between;
   padding: 0 2rem;
   height: 72px;
-  background: var(--green-dark);
+  background: var(--white);
+  border-bottom: 2px solid var(--gold);
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 12px rgba(200,150,62,0.12);
 }
 
 .nav-brand {
