@@ -112,7 +112,7 @@ p:last-child { margin-bottom: 0; }
   letter-spacing: 0.02em;
 }
 .brand-tagline {
-  color: rgba(255,255,255,0.6);
+  color: var(--gray-400);
   font-size: 0.72rem;
   letter-spacing: 0.05em;
   text-transform: uppercase;
