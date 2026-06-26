@@ -258,12 +258,13 @@ p:last-child { margin-bottom: 0; }
 }
 
 .hero-bismillah {
-  font-size: 1.8rem;
+  font-size: 2rem;
   color: var(--gold);
   margin-bottom: 1.5rem;
-  font-family: 'Segoe UI', serif;
+  font-family: var(--font-arabic);
   opacity: 0.9;
   letter-spacing: 0.04em;
+  direction: rtl;
 }
 
 .hero-content h1 {
