@@ -780,7 +780,8 @@ p:last-child { margin-bottom: 0; }
    Footer
    ===================================================== */
 footer {
-  background: var(--green-dark);
+  background: var(--cream);
+  border-top: 2px solid var(--gold);
   padding: 3rem 0 2rem;
 }
 .footer-inner {
@@ -791,16 +792,16 @@ footer {
   gap: 1.5rem;
 }
 .footer-brand .brand-name { color: var(--gold); font-size: 1.1rem; font-weight: 800; }
-.footer-brand p { color: rgba(255,255,255,0.5); font-size: 0.88rem; margin: 0.25rem 0 0; }
+.footer-brand p { color: var(--gray-400); font-size: 0.88rem; margin: 0.25rem 0 0; }
 .footer-nav {
   display: flex;
   gap: 0.25rem 1rem;
   flex-wrap: wrap;
   justify-content: center;
 }
-.footer-nav a { color: rgba(255,255,255,0.65); font-size: 0.88rem; transition: color var(--transition); }
+.footer-nav a { color: var(--gray-400); font-size: 0.88rem; transition: color var(--transition); }
 .footer-nav a:hover { color: var(--gold); }
-.footer-copy { color: rgba(255,255,255,0.35); font-size: 0.82rem; }
+.footer-copy { color: var(--gray-400); font-size: 0.82rem; }
 
 /* =====================================================
    Form Success State
