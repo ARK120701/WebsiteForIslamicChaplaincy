@@ -285,7 +285,8 @@ p:last-child { margin-bottom: 0; }
    Page Hero (inner pages)
    ===================================================== */
 .page-hero {
-  background: var(--green-dark);
+  background: var(--white);
+  border-bottom: 1px solid var(--gray-200);
   padding: 4rem 0 3rem;
   position: relative;
   overflow: hidden;
@@ -294,12 +295,12 @@ p:last-child { margin-bottom: 0; }
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 70% 50%, rgba(74,148,104,0.2) 0%, transparent 60%);
+  background: radial-gradient(ellipse at 70% 50%, rgba(200,150,62,0.08) 0%, transparent 60%);
 }
 .page-hero .container { position: relative; z-index: 1; }
 .page-hero .section-label { color: var(--gold); }
-.page-hero h1 { color: white; margin-bottom: 1rem; }
-.page-hero p { color: rgba(255,255,255,0.75); font-size: 1.1rem; max-width: 640px; }
+.page-hero h1 { color: var(--gray-900); margin-bottom: 1rem; }
+.page-hero p { color: var(--gray-600); font-size: 1.1rem; max-width: 640px; }
 
 /* =====================================================
    Mission Section
