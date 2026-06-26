@@ -185,10 +185,10 @@ p:last-child { margin-bottom: 0; }
 .btn-outline-light {
   background: transparent;
   color: white;
-  border-color: rgba(255,255,255,0.6);
+  border-color: rgba(255,255,255,0.75);
 }
 .btn-outline-light:hover {
-  background: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.2);
   color: white;
   border-color: white;
 }
