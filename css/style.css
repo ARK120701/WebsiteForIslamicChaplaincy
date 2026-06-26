@@ -264,7 +264,7 @@ p:last-child { margin-bottom: 0; }
 }
 
 .hero-content h1 {
-  color: white;
+  color: var(--gray-900);
   font-size: clamp(2.2rem, 5vw, 3.6rem);
   margin-bottom: 1.25rem;
 }
@@ -274,7 +274,7 @@ p:last-child { margin-bottom: 0; }
 }
 
 .hero-sub {
-  color: rgba(255,255,255,0.8);
+  color: var(--gray-600);
   font-size: 1.15rem;
   max-width: 600px;
   margin: 0 auto;
