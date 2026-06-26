@@ -396,8 +396,8 @@ p:last-child { margin-bottom: 0; }
 .team-avatar {
   width: 72px;
   height: 72px;
-  background: var(--green-dark);
-  color: var(--gold);
+  background: var(--gold);
+  color: var(--white);
   border-radius: 50%;
   display: flex;
   align-items: center;
