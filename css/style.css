@@ -217,6 +217,7 @@ p:last-child { margin-bottom: 0; }
   gap: 1rem;
   flex-wrap: wrap;
   margin-top: 2rem;
+  justify-content: center;
 }
 
 /* =====================================================
