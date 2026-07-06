@@ -105,8 +105,16 @@ p:last-child { margin-bottom: 0; }
 
 .nav-brand {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.75rem;
   line-height: 1.2;
+}
+.nav-logo {
+  height: 48px;
+  width: 48px;
+  object-fit: contain;
+  border-radius: 50%;
 }
 .brand-name {
   color: var(--gold);
