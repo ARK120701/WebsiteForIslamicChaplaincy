@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Job Finder — NMCA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link rel="icon" type="image/png" href="images/logo.png" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* Job Finder specific styles */
+    .jf-root {
+      --jf-ink: #171d29;
+      --jf-ink-2: #1f2735;
+      --jf-ink-3: #2a3446;
+      --jf-brass: #c8963e;
+      --jf-brass-bright: #e0bd7d;
+      --jf-paper: #f2ede2;
+      --jf-paper-dim: #c9c2b0;
+      --jf-line: rgba(200,150,62,0.28);
+      background: var(--jf-ink);
+      color: var(--jf-paper);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .jf-search-panel {
+      max-width: 640px;
+      margin: 0 auto 2.5rem;
+      background: var(--jf-ink-2);
+      border: 1px solid var(--jf-line);
+      border-radius: 6px;
+      padding: 1.4rem;
+    }
+    .jf-search-panel label {
+      display: block;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--jf-brass-bright);
+      margin-bottom: 0.5rem;
+    }
+    .jf-search-row {
+      display: flex;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+    }
+    .jf-search-row input {
+      flex: 1;
+      min-width: 180px;
+      background: var(--jf-ink);
+      border: 1px solid var(--jf-line);
+      color: var(--jf-paper);
+      padding: 0.7rem 0.9rem;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      font-family: inherit;
+    }
+    .jf-search-row input::placeholder { color: var(--jf-paper-dim); }
+    .jf-search-row input:focus { outline: 1.5px solid var(--jf-brass); }
+    .jf-search-row button {
+      background: var(--jf-brass);
+      color: var(--jf-ink);
+      border: none;
+      padding: 0.7rem 1.4rem;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.92rem;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.15s ease;
+    }
+    .jf-search-row button:hover { background: var(--jf-brass-bright); }
+    .jf-search-note {
+      font-size: 0.8rem;
+      color: var(--jf-paper-dim);
+      margin-top: 0.65rem;
+    }
+
+    .jf-main {
+      padding: 2.5rem 1.5rem 3rem;
+    }
+
+    .jf-waypoint {
+      display: flex;
+      align-items: baseline;
+      gap: 0.9rem;
+      margin: 3rem 0 1.2rem;
+    }
+    .jf-waypoint:first-child { margin-top: 0; }
+    .jf-waypoint .jf-mark {
+      color: var(--jf-brass);
+      font-size: 0.85rem;
+    }
+    .jf-waypoint h2 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.4rem;
+      color: var(--jf-paper);
+      margin: 0;
+      font-weight: 700;
+    }
+    .jf-waypoint .jf-rule {
+      flex: 1;
+      height: 1px;
+      background: var(--jf-line);
+    }
+    .jf-section-desc {
+      color: var(--jf-paper-dim);
+      font-size: 0.9rem;
+      margin: -0.4rem 0 1.2rem;
+      max-width: 680px;
+    }
+
+    .jf-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 0.9rem;
+    }
+
+    .jf-card {
+      display: block;
+      background: var(--jf-ink-2);
+      border: 1px solid var(--jf-line);
+      border-radius: 6px;
+      padding: 1.1rem 1.2rem;
+      text-decoration: none;
+      color: var(--jf-paper);
+      transition: border-color 0.15s ease, transform 0.15s ease, background 0.15s ease;
+    }
+    .jf-card:hover {
+      border-color: var(--jf-brass);
+      background: var(--jf-ink-3);
+      transform: translateY(-2px);
+    }
+    .jf-card .jf-name {
+      font-weight: 600;
+      font-size: 0.98rem;
+      margin-bottom: 0.3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .jf-card .jf-arrow {
+      color: var(--jf-brass);
+      opacity: 0.7;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .jf-card .jf-desc {
+      font-size: 0.82rem;
+      color: var(--jf-paper-dim);
+    }
+
+    @media (max-width: 640px) {
+      .jf-search-row { flex-direction: column; }
+      .jf-search-row button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="nav-brand">
+        <img src="images/logo.png" alt="NMCA Logo" class="nav-logo" />
+        <div class="nav-brand-text">
+          <span class="brand-name">National Muslim Chaplains Association</span>
+        </div>
+      </div>
+      <button class="nav-toggle" aria-label="Toggle navigation">&#9776;</button>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About Us</a></li>
+        <li><a href="chaplaincy.html">What is Chaplaincy?</a></li>
+        <li><a href="cpe.html">CPE Process</a></li>
+        <li><a href="team.html">Our Team</a></li>
+        <li><a href="jobs.html" class="active">Job Finder</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="page-hero">
+      <div class="container">
+        <div class="section-label">Career Resources</div>
+        <h1>Chaplaincy Job Finder</h1>
+        <p>
+          One page, every chaplaincy job board. Enter your location and click any
+          board to jump straight into a pre-filled chaplain search — from major
+          job sites to niche networks only chaplains know about.
+        </p>
+      </div>
+    </section>
+
+    <section class="section" style="padding-top: 2rem; padding-bottom: 0;">
+      <div class="container">
+        <div class="jf-search-panel">
+          <label for="jf-loc">Location (city, state, or "remote")</label>
+          <div class="jf-search-row">
+            <input id="jf-loc" type="text" placeholder="e.g. Chicago, IL — optional" value="New York, NY" />
+            <button onclick="jfApplyLocation()">Update all links</button>
+          </div>
+          <div class="jf-search-note">This won't scrape or store anything — it just builds the correct search URL for each site and opens it in a new tab when you click a card.</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="jf-root">
+      <div class="jf-main" style="max-width: 1080px; margin: 0 auto;">
+
+        <div class="jf-waypoint"><span class="jf-mark">✦</span><h2>Live snapshot — APC job board</h2><div class="jf-rule"></div></div>
+        <p class="jf-section-desc">Pulled directly from the Association of Professional Chaplains' posting page on <strong id="jf-snapshot-date"></strong>. Point-in-time snapshot, not a live feed.</p>
+        <div class="jf-grid" id="jf-snapshot"></div>
+
+        <div class="jf-waypoint"><span class="jf-mark">✦</span><h2>Live snapshot — Chaplaincy Innovation Lab</h2><div class="jf-rule"></div></div>
+        <p class="jf-section-desc">Pulled from the Lab's job-postings page. Same rules as above: dated snapshot, not a live feed.</p>
+        <div class="jf-grid" id="jf-snapshot-cil"></div>
+
+        <div class="jf-waypoint"><span class="jf-mark">✦</span><h2>General job boards</h2><div class="jf-rule"></div></div>
+        <p class="jf-section-desc">The large, general-purpose sites. All chaplaincy postings that get cross-listed anywhere tend to show up here too.</p>
+        <div class="jf-grid" id="jf-general"></div>
+
+        <div class="jf-waypoint"><span class="jf-mark">✦</span><h2>Chaplaincy &amp; spiritual care networks</h2><div class="jf-rule"></div></div>
+        <p class="jf-section-desc">Run by the professional bodies that certify and represent chaplains — often where employers post first, before a role ever reaches a general board.</p>
+        <div class="jf-grid" id="jf-specialty"></div>
+
+        <div class="jf-waypoint"><span class="jf-mark">✦</span><h2>Healthcare &amp; hospice chaplaincy</h2><div class="jf-rule"></div></div>
+        <div class="jf-grid" id="jf-healthcare"></div>
+
+        <div class="jf-waypoint"><span class="jf-mark">✦</span><h2>Military, government &amp; corrections</h2><div class="jf-rule"></div></div>
+        <div class="jf-grid" id="jf-government"></div>
+
+        <div class="jf-waypoint"><span class="jf-mark">✦</span><h2>Higher education &amp; campus ministry</h2><div class="jf-rule"></div></div>
+        <div class="jf-grid" id="jf-education"></div>
+
+        <div class="jf-waypoint"><span class="jf-mark">✦</span><h2>Corporate, church &amp; ministry chaplaincy</h2><div class="jf-rule"></div></div>
+        <div class="jf-grid" id="jf-ministry"></div>
+
+      </div>
+    </div>
+
+    <section class="section cta-section">
+      <div class="container cta-inner">
+        <h2>Need Guidance on the Path?</h2>
+        <p>
+          Finding a job is one step — getting CPE-certified is the foundation.
+          Our team can walk you through everything.
+        </p>
+        <div class="hero-buttons">
+          <a href="cpe.html" class="btn btn-primary">Learn the CPE Path</a>
+          <a href="contact.html" class="btn btn-outline-light">Get in Touch</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <div class="footer-brand" style="display:flex;align-items:center;gap:0.75rem;">
+        <img src="images/logo.png" alt="NMCA Logo" style="height:48px;width:48px;object-fit:contain;border-radius:50%;">
+        <div>
+          <span class="brand-name">National Muslim Chaplains Association</span>
+        </div>
+      </div>
+      <nav class="footer-nav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="chaplaincy.html">Chaplaincy</a>
+        <a href="cpe.html">CPE Process</a>
+        <a href="team.html">Team</a>
+        <a href="jobs.html">Job Finder</a>
+        <a href="contact.html">Contact</a>
+      </nav>
+      <p class="footer-copy">&copy; 2025 National Muslim Chaplains Association. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    const jfData = {
+      general: [
+        ["LinkedIn", "Broadest reach, updated constantly", "https://www.linkedin.com/jobs/search/?keywords=chaplain&location={LOC}"],
+        ["Indeed", "Largest general aggregator", "https://www.indeed.com/jobs?q=chaplain&l={LOC}"],
+        ["ZipRecruiter", "Easy-apply, wide net", "https://www.ziprecruiter.com/candidate/search?search=chaplain&location={LOC}"],
+        ["Glassdoor", "Includes salary & employer reviews", "https://www.glassdoor.com/Job/jobs.htm?sc.keyword=chaplain&locKeyword={LOC}"],
+        ["Monster", "Long-running general board", "https://www.monster.com/jobs/search?q=chaplain&where={LOC}"],
+        ["CareerBuilder", "General job board", "https://www.careerbuilder.com/jobs?keywords=chaplain&location={LOC}"],
+        ["SimplyHired", "Aggregator similar to Indeed", "https://www.simplyhired.com/search?q=chaplain&l={LOC}"],
+        ["CareerJet", "Aggregator, filterable by healthcare sector", "https://www.careerjet.com/search/jobs?s=chaplain&l={LOC_OR_USA}"],
+      ],
+      specialty: [
+        ["Association of Professional Chaplains", "The main U.S. board-certification body — direct job search", "https://www.professionalchaplains.org/jobs_search.asp"],
+        ["Spiritual Care Association", "Chaplain, chaplain director & faith community nurse roles", "https://spiritualcareassociation.org/find-job"],
+        ["Chaplaincy Innovation Lab", "Curated current openings from hiring institutions", "https://chaplaincyinnovation.org/chaplaincy-job-postings"],
+        ["National Association of Catholic Chaplains", "Chaplain, CPE resident, mission director roles", "https://www.nacc.org/resources/job-listings/"],
+        ["ACPE Career Opportunities", "Postings from Clinical Pastoral Education partner sites", "https://www.acpe.edu/ACPE/News/Career_Opportunities/ACPE/News/CareerOpportunities_PostingDate.aspx"],
+        ["Canadian Association for Spiritual Care", "Multi-faith spiritual care roles in Canada", "http://spiritualcare.ca/category/careers/"],
+      ],
+      healthcare: [
+        ["Healthcare Jobsite", "Chaplain roles in hospitals & medical facilities", "https://www.healthcarejobsite.com/jobs/job-search.asp?FKeywords=Chaplain"],
+        ["Miracle Workers", "Healthcare-focused chaplain listings", "https://www.miracleworkers.com/jobs?Keywords=chaplain"],
+        ["Pediatric Chaplains Network", "Children's hospital chaplaincy postings", "https://pediatricchaplains.org/job-postings/"],
+        ["NHPCO Career Center", "Hospice & palliative care org's own board", "https://careers.nhpco.org/"],
+      ],
+      government: [
+        ["USAJobs", "Federal chaplaincy: VA, Bureau of Prisons, National Guard", "https://www.usajobs.gov/Search/Results?k=chaplain&l={LOC}"],
+        ["Federal Bureau of Prisons — Chaplain", "BOP's own listing of open chaplain posts nationwide", "https://www8.fed.bop.gov/jobs/positions/index.jsp?p=Chaplain"],
+        ["VA National Chaplain Service", "VA's own chaplain service & career opportunities page", "https://www.patientcare.va.gov/chaplain/index.asp"],
+        ["Presbyterian Council for Chaplains & Military Personnel", "VA, military & Bureau of Prisons endorsement pathways", "https://pccmp.org/"],
+        ["Ministry Employment", "Largely Navy chaplaincy connections", "https://ministryemployment.com/jobs/"],
+        ["Army Chaplain Corps", "Direct recruiting info for Army chaplaincy", "https://www.goarmy.com/chaplain/become-an-army-chaplain.html"],
+      ],
+      education: [
+        ["HigherEdJobs — Religious & Spiritual Life", "Campus minister, university chaplain postings", "https://www.higheredjobs.com/admin/search.cfm?JobCat=174"],
+        ["Nat'l Assoc. of College & University Chaplains", "Multifaith higher-ed chaplaincy board", "https://www.nacuc.net/jobs"],
+        ["ACSLHE Job Board", "Assoc. for Chaplaincy & Spiritual Life in Higher Education", "https://acslhe.org/jobs"],
+        ["Unitarian Universalist Association", "Community, contract & settled ministry search", "https://ministrysearch.uua.org/job-board"],
+      ],
+      ministry: [
+        ["Corporate Chaplains of America", "Part- and full-time corporate chaplain roles", "https://chaplain.org/employment-opportunities/"],
+        ["Church Staffing", "Free search engine for church & ministry jobs", "https://www.churchstaffing.com/"],
+        ["ChurchJobs.net", "Church staffing firm, wide category range", "https://www.churchjobs.net/jobs/search/"],
+        ["Christian Jobs", "General Christian job board with chaplain listings", "https://www.christianjobs.com/jobs?q=chaplain"],
+        ["MinistryJobs", "General ministry-role board", "https://ministryjobs.com/jobs"],
+        ["Jewish Chaplains Council", "JCC Association chaplaincy postings", "https://www.jccworks.com/"],
+      ],
+    };
+
+    const jfSnapshotDate = "July 25, 2026";
+    const jfSnapshot = [
+      { title: "Hospice Chaplain", org: "Mt. Hood Hospice", loc: "Sandy, OR", salary: "$34–$36/hr", note: "Part-time (2 days/wk) hospice role covering spiritual assessments and family support." },
+      { title: "Chaplain (Full-Time)", org: "Atlantic Health – Morristown Medical Center", loc: "Morristown, NJ", salary: "$30–$50/hr", note: "Hospital chaplain role; requires 4 units CPE and board certification." },
+      { title: "Senior Living Community Chaplain", org: "Christian Care Communities", loc: "Hopkinsville, KY", salary: "", note: "Pastoral care across independent living and skilled nursing; MDiv preferred." },
+      { title: "Campus Chaplain & Director of Spiritual Life", org: "Augustana College", loc: "Rock Island, IL", salary: "$64,000–$74,000/yr", note: "ELCA-ordained campus ministry leadership role at a Lutheran liberal arts college." },
+      { title: "Chaplain Manager & Chaplain Non-Certified I", org: "CHRISTUS St. Vincent Regional Medical Center", loc: "Santa Fe, NM", salary: "", note: "Two openings — a managerial post and a non-certified staff post — at a faith-based acute-care hospital." },
+      { title: "Chaplain II", org: "Mercy", loc: "Cape Girardeau, MO", salary: "", note: "Health-system chaplaincy role; 4 units CPE, board-eligible." },
+      { title: "Senior Chaplain", org: "Ohio State University Wexner Medical Center", loc: "Columbus, OH", salary: "Varies", note: "Mentors CPE residents; requires MDiv and board certification (APC/NACC/NAJC)." },
+      { title: "High School Chaplain", org: "Notre Dame Prep of Sacred Heart University", loc: "Fairfield, CT", salary: "", note: "Catholic high school seeking a spiritual leader for liturgies and campus ministry." },
+      { title: "Staff Chaplain – Chaplaincy Services", org: "Eisenhower Health", loc: "Rancho Mirage, CA", salary: "$33.73–$51.24/hr", note: "Bilingual (Spanish/English) preferred; interfaith patient and staff support." },
+      { title: "Chaplain I – PRN", org: "Baylor Scott & White", loc: "Lakeway, TX", salary: "", note: "PRN hospital chaplain, on-call, must live within 30 minutes of the facility." },
+      { title: "Chaplain I – PRN", org: "Baylor Scott & White", loc: "Temple, TX", salary: "", note: "Same PRN chaplain role at BSW's Temple location." },
+      { title: "Staff Chaplain", org: "Ascension", loc: "Milwaukee, WI", salary: "Competitive, DOE", note: "Two full-time openings across two Ascension Wisconsin hospital sites." },
+      { title: "Chaplain – Chaplaincy Spiritual Care (FT)", org: "Baptist Health South Florida", loc: "Miami, FL", salary: "", note: "Full-time hospital chaplain role at a South Florida health system." },
+    ];
+
+    const jfSnapshotCIL = [
+      { title: "CPE Program Manager", org: "Baylor Scott & White Health", loc: "Dallas, TX", salary: "", note: "Manages and administers the health system's ACPE-accredited clinical pastoral education program." },
+      { title: "Director of Spiritual Care", org: "Nationwide Children's Hospital", loc: "Columbus, OH", salary: "", note: "Oversees 24-hour pastoral care coverage across the hospital." },
+      { title: "Chaplain", org: "WVU Medicine Golisano Children's Hospital", loc: "Morgantown, WV", salary: "", note: "Pediatric hospital chaplain role; apply link posted directly on the Lab's page." },
+      { title: "Staff Chaplain", org: "Bronson Healthcare Group", loc: "Battle Creek, MI", salary: "", note: "Part-time (24 hrs/week), two 12-hour shifts including an overnight, at Bronson Battle Creek Hospital." },
+      { title: "University Chaplain", org: "Elmhurst University", loc: "Elmhurst, IL", salary: "", note: "Seeks an experienced, inclusive leader for this influential campus ministry post." },
+    ];
+
+    function jfRenderSnapshot() {
+      document.getElementById('jf-snapshot-date').textContent = jfSnapshotDate;
+      const el = document.getElementById('jf-snapshot');
+      el.innerHTML = "";
+      jfSnapshot.forEach(job => {
+        const a = document.createElement('a');
+        a.className = 'jf-card';
+        a.href = 'https://www.apchaplains.org/careers/job-opportunities/';
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.innerHTML = `<div class="jf-name">${job.title}<span class="jf-arrow">↗</span></div>
+          <div class="jf-desc"><strong>${job.org}</strong> — ${job.loc}${job.salary ? " · " + job.salary : ""}<br>${job.note}</div>`;
+        el.appendChild(a);
+      });
+    }
+
+    function jfRenderSnapshotCIL() {
+      const el = document.getElementById('jf-snapshot-cil');
+      el.innerHTML = "";
+      jfSnapshotCIL.forEach(job => {
+        const a = document.createElement('a');
+        a.className = 'jf-card';
+        a.href = 'https://chaplaincyinnovation.org/chaplaincy-job-postings';
+        a.target = '_blank';
+        a.rel = 'noopener noreferrer';
+        a.innerHTML = `<div class="jf-name">${job.title}<span class="jf-arrow">↗</span></div>
+          <div class="jf-desc"><strong>${job.org}</strong> — ${job.loc}${job.salary ? " · " + job.salary : ""}<br>${job.note}</div>`;
+        el.appendChild(a);
+      });
+    }
+
+    function jfBuildUrl(template, loc) {
+      const encoded = encodeURIComponent(loc || "");
+      return template
+        .replace("{LOC_OR_USA}", loc ? encoded : "USA")
+        .replace("{LOC}", encoded);
+    }
+
+    function jfRender(loc) {
+      for (const [sectionId, items] of Object.entries(jfData)) {
+        const el = document.getElementById('jf-' + sectionId);
+        el.innerHTML = "";
+        items.forEach(([name, desc, template]) => {
+          const a = document.createElement("a");
+          a.className = "jf-card";
+          a.href = jfBuildUrl(template, loc);
+          a.target = "_blank";
+          a.rel = "noopener noreferrer";
+          a.innerHTML = `<div class="jf-name">${name}<span class="jf-arrow">↗</span></div><div class="jf-desc">${desc}</div>`;
+          el.appendChild(a);
+        });
+      }
+    }
+
+    function jfApplyLocation() {
+      jfRender(document.getElementById('jf-loc').value.trim());
+    }
+
+    document.getElementById('jf-loc').addEventListener('keydown', e => {
+      if (e.key === 'Enter') jfApplyLocation();
+    });
+
+    jfRender("New York, NY");
+    jfRenderSnapshot();
+    jfRenderSnapshotCIL();
+  </script>
+</body>
+</html>
