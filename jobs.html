@@ -152,6 +152,14 @@
       display: none;
     }
 
+    /* ── Override CTA section to match dark skin ── */
+    .cta-section {
+      background: var(--jf-ink-2);
+      border-top: 1px solid var(--jf-line);
+    }
+    .cta-inner h2 { color: var(--jf-paper); }
+    .cta-inner p  { color: var(--jf-paper-dim); }
+
     @media (max-width: 640px) {
       .city-search-row { flex-direction: column; }
       .city-search-row button { width: 100%; }
