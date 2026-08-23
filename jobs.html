@@ -10,22 +10,10 @@
   <link rel="icon" type="image/png" href="images/logo.png" />
   <link rel="stylesheet" href="css/style.css" />
   <style>
-    /* ── Job Finder skin ── */
-    :root {
-      --jf-ink:   #171d29;
-      --jf-ink-2: #1f2735;
-      --jf-ink-3: #2a3446;
-      --jf-brass: #c8963e;
-      --jf-brass-bright: #e0bd7d;
-      --jf-paper: #f2ede2;
-      --jf-paper-dim: #c9c2b0;
-      --jf-line:  rgba(200,150,62,0.28);
-    }
-
     /* ── City search bar ── */
     .city-search-wrap {
-      background: var(--jf-ink-2);
-      border-bottom: 1px solid var(--jf-line);
+      background: var(--cream);
+      border-bottom: 2px solid var(--gold);
       padding: 2rem 1.5rem;
     }
     .city-search-inner {
@@ -34,12 +22,12 @@
     }
     .city-search-inner h2 {
       font-family: 'Playfair Display', Georgia, serif;
-      color: var(--jf-paper);
+      color: var(--green-dark);
       font-size: 1.4rem;
       margin: 0 0 0.4rem;
     }
     .city-search-inner p {
-      color: var(--jf-paper-dim);
+      color: var(--gray-600);
       font-size: 0.9rem;
       margin: 0 0 1rem;
     }
@@ -51,39 +39,40 @@
     .city-search-row input {
       flex: 1;
       min-width: 200px;
-      background: var(--jf-ink);
-      border: 1px solid var(--jf-line);
-      color: var(--jf-paper);
+      background: var(--white);
+      border: 1.5px solid var(--gray-200);
+      color: var(--gray-900);
       padding: 0.75rem 1rem;
-      border-radius: 4px;
+      border-radius: 6px;
       font-size: 1rem;
       font-family: inherit;
+      transition: border-color 0.15s;
     }
-    .city-search-row input::placeholder { color: var(--jf-paper-dim); }
-    .city-search-row input:focus { outline: 2px solid var(--jf-brass); }
+    .city-search-row input::placeholder { color: var(--gray-400); }
+    .city-search-row input:focus { outline: none; border-color: var(--gold); box-shadow: 0 0 0 3px rgba(200,150,62,0.12); }
     .city-search-row button {
-      background: var(--jf-brass);
-      color: var(--jf-ink);
+      background: var(--gold);
+      color: var(--white);
       border: none;
       padding: 0.75rem 1.5rem;
-      border-radius: 4px;
+      border-radius: 6px;
       font-weight: 700;
       font-size: 0.95rem;
       cursor: pointer;
       font-family: inherit;
       transition: background 0.15s;
     }
-    .city-search-row button:hover { background: var(--jf-brass-bright); }
+    .city-search-row button:hover { background: var(--gold-light); }
     .city-search-note {
       font-size: 0.78rem;
-      color: var(--jf-paper-dim);
+      color: var(--gray-400);
       margin-top: 0.6rem;
     }
 
     /* ── Job sections ── */
     .jf-root {
-      background: var(--jf-ink);
-      color: var(--jf-paper);
+      background: var(--white);
+      color: var(--gray-900);
     }
     .jf-main {
       max-width: 1080px;
@@ -97,17 +86,17 @@
       margin: 3rem 0 1rem;
     }
     .jf-waypoint:first-child { margin-top: 0; }
-    .jf-waypoint .jf-mark { color: var(--jf-brass); font-size: 0.85rem; }
+    .jf-waypoint .jf-mark { color: var(--gold); font-size: 0.85rem; }
     .jf-waypoint h2 {
       font-family: 'Playfair Display', Georgia, serif;
       font-size: 1.35rem;
-      color: var(--jf-paper);
+      color: var(--green-dark);
       margin: 0;
       font-weight: 700;
     }
-    .jf-waypoint .jf-rule { flex: 1; height: 1px; background: var(--jf-line); }
+    .jf-waypoint .jf-rule { flex: 1; height: 1px; background: var(--gray-200); }
     .jf-section-desc {
-      color: var(--jf-paper-dim);
+      color: var(--gray-600);
       font-size: 0.88rem;
       margin: -0.3rem 0 1rem;
       max-width: 680px;
@@ -119,33 +108,35 @@
     }
     .jf-card {
       display: block;
-      background: var(--jf-ink-2);
-      border: 1px solid var(--jf-line);
-      border-radius: 6px;
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      border-radius: 8px;
       padding: 1.1rem 1.2rem;
       text-decoration: none;
-      color: var(--jf-paper);
-      transition: border-color 0.15s, transform 0.15s, background 0.15s;
+      color: var(--gray-900);
+      box-shadow: 0 2px 8px rgba(200,150,62,0.07);
+      transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
     }
     .jf-card:hover {
-      border-color: var(--jf-brass);
-      background: var(--jf-ink-3);
+      border-color: var(--gold);
+      box-shadow: 0 4px 16px rgba(200,150,62,0.18);
       transform: translateY(-2px);
     }
     .jf-card.hidden { display: none; }
     .jf-name {
       font-weight: 600;
       font-size: 0.97rem;
+      color: var(--green-dark);
       margin-bottom: 0.3rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 0.5rem;
     }
-    .jf-arrow { color: var(--jf-brass); opacity: 0.7; font-size: 1rem; flex-shrink: 0; }
-    .jf-desc { font-size: 0.81rem; color: var(--jf-paper-dim); }
+    .jf-arrow { color: var(--gold); opacity: 0.8; font-size: 1rem; flex-shrink: 0; }
+    .jf-desc { font-size: 0.81rem; color: var(--gray-600); }
     .jf-empty {
-      color: var(--jf-paper-dim);
+      color: var(--gray-400);
       font-size: 0.9rem;
       font-style: italic;
       padding: 0.5rem 0;
@@ -212,13 +203,13 @@
         <div class="jf-waypoint"><span class="jf-mark">✦</span><h2>Current listings — APC Job Board</h2><div class="jf-rule"></div></div>
         <p class="jf-section-desc">Sourced from the Association of Professional Chaplains' job board — updated <strong>August 22, 2026</strong>. Click any card to apply on the APC site directly.</p>
         <div class="jf-grid" id="jf-apc"></div>
-        <div class="jf-empty" id="jf-apc-empty">No listings match that location — <a href="https://www.apchaplains.org/careers/job-opportunities/" target="_blank" rel="noopener" style="color:var(--jf-brass-bright)">view all on APC's site</a>.</div>
+        <div class="jf-empty" id="jf-apc-empty">No listings match that location — <a href="https://www.apchaplains.org/careers/job-opportunities/" target="_blank" rel="noopener" style="color:var(--gold)">view all on APC's site</a>.</div>
 
         <!-- ── Current listings: Chaplaincy Innovation Lab ── -->
         <div class="jf-waypoint"><span class="jf-mark">✦</span><h2>Current listings — Chaplaincy Innovation Lab</h2><div class="jf-rule"></div></div>
         <p class="jf-section-desc">Sourced from the Lab's job-postings page — updated <strong>August 22, 2026</strong>.</p>
         <div class="jf-grid" id="jf-cil"></div>
-        <div class="jf-empty" id="jf-cil-empty">No listings match that location — <a href="https://chaplaincyinnovation.org/chaplaincy-job-postings" target="_blank" rel="noopener" style="color:var(--jf-brass-bright)">view all on the Lab's site</a>.</div>
+        <div class="jf-empty" id="jf-cil-empty">No listings match that location — <a href="https://chaplaincyinnovation.org/chaplaincy-job-postings" target="_blank" rel="noopener" style="color:var(--gold)">view all on the Lab's site</a>.</div>
 
         <!-- ── CPE Residencies ── -->
         <div class="jf-waypoint"><span class="jf-mark">✦</span><h2>CPE Residencies — open now</h2><div class="jf-rule"></div></div>
