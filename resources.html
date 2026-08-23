@@ -465,20 +465,11 @@
     }
   }
 
-  function jfSearch() {
-    const query = document.getElementById('jf-city').value.trim();
-    filterSnapshot('jf-apc',      'jf-apc-empty',      apcJobs,      query);
-    filterSnapshot('jf-cil',      'jf-cil-empty',      cilJobs,      query);
-    filterSnapshot('jf-residency','jf-residency-empty', residencyJobs, query);
-    renderBoards(query);
-  }
-
-  document.getElementById('jf-city').addEventListener('keydown', e => {
-    if (e.key === 'Enter') jfSearch();
-  });
-
-  // Initial render — show all
-  jfSearch();
+  // Render all boards on load
+  filterSnapshot('jf-apc',       'jf-apc-empty',       apcJobs,       null);
+  filterSnapshot('jf-cil',       'jf-cil-empty',        cilJobs,       null);
+  filterSnapshot('jf-residency', 'jf-residency-empty',  residencyJobs, null);
+  renderBoards('');
   </script>
 </body>
 </html>
