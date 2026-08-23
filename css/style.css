@@ -2,16 +2,17 @@
    Base & Variables
    ===================================================== */
 :root {
-  --green-dark:   #8a6520;
+  --green-dark:   #b07d20;
   --green-mid:    #c8963e;
   --green-light:  #e8b86d;
   --gold:         #c8963e;
+  --gold-dark:    #b07d20;
   --gold-light:   #e8b86d;
-  --cream:        #fffbf4;
+  --cream:        #fffdf7;
   --white:        #ffffff;
   --gray-100:     #fafafa;
-  --gray-200:     #eeeeee;
-  --gray-400:     #aaaaaa;
+  --gray-200:     #f0ebe0;
+  --gray-400:     #b8a880;
   --gray-600:     #666666;
   --gray-900:     #1a1a1a;
   --font-sans:    'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif;
