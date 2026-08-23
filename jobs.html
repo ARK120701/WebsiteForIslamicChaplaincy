@@ -465,6 +465,7 @@
   function filterSnapshot(gridId, emptyId, jobs, query) {
     const grid = document.getElementById(gridId);
     const empty = document.getElementById(emptyId);
+    if (!grid || !empty) return;
     grid.innerHTML = "";
     const matches = query ? jobs.filter(j => jobMatchesQuery(j, query)) : jobs;
     if (matches.length === 0) {
