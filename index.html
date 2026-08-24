@@ -12,9 +12,42 @@
   <style>
     /* ── Page-level overrides for the redesigned homepage ── */
 
+    :root {
+      --ink: #18140f;
+      --ink-soft: rgba(255,255,255,0.55);
+    }
+
     /* Typography upgrade */
     body {
       font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    }
+
+    /* Top accent bar */
+    body::before {
+      content: '';
+      display: block;
+      height: 3px;
+      width: 100%;
+      background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+    }
+
+    /* Shared eyebrow treatment for section labels */
+    .goals-section .section-label,
+    .why-cpe-text .section-label,
+    .team-preview-header .section-label {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .goals-section .section-label::before,
+    .why-cpe-text .section-label::before,
+    .team-preview-header .section-label::before {
+      content: '';
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.55;
     }
 
     /* ── Navbar refinement ── */
@@ -38,7 +71,7 @@
 
     /* ── Hero ── */
     .hero {
-      min-height: 94vh;
+      min-height: 92vh;
       background:
         url('https://images.unsplash.com/photo-1585036156171-384164a8c675?w=1800&auto=format&fit=crop&q=80')
         center 30% / cover no-repeat;
@@ -48,9 +81,9 @@
     .hero::before {
       background: linear-gradient(
         to right,
-        rgba(15,12,9,0.82) 0%,
-        rgba(15,12,9,0.65) 55%,
-        rgba(15,12,9,0.25) 100%
+        rgba(24,20,15,0.86) 0%,
+        rgba(24,20,15,0.68) 55%,
+        rgba(24,20,15,0.28) 100%
       );
     }
     .hero::after { display: none; }
@@ -58,7 +91,7 @@
     .hero-content {
       text-align: left;
       max-width: 1140px;
-      padding: 0 2rem 7rem;
+      padding: 0 2rem 6rem;
       margin: 0 auto;
       width: 100%;
     }
@@ -109,6 +142,24 @@
       padding: 0.8rem 2rem;
       font-family: 'Plus Jakarta Sans', sans-serif;
       font-weight: 500;
+    }
+
+    .hero-credibility {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-top: 2.25rem;
+      color: var(--ink-soft);
+      font-size: 0.82rem;
+      letter-spacing: 0.02em;
+    }
+    .hero-credibility::before {
+      content: '';
+      display: block;
+      width: 20px;
+      height: 1px;
+      background: rgba(255,255,255,0.35);
+      flex-shrink: 0;
     }
 
     /* Scroll indicator */
@@ -168,6 +219,15 @@
       color: var(--gray-600);
       max-width: 640px;
     }
+    .mission-text-col .lead::first-letter {
+      font-family: var(--font-serif);
+      font-size: 3.2rem;
+      font-weight: 700;
+      color: var(--gold);
+      float: left;
+      line-height: 0.8;
+      padding: 0.15rem 0.4rem 0 0;
+    }
     .mission-text-col p {
       font-size: 1rem;
       line-height: 1.8;
@@ -190,7 +250,7 @@
 
     /* ── Pillars ── */
     .goals-section {
-      background: #0f0c09;
+      background: var(--ink);
       padding: 6rem 0;
     }
     .goals-section .section-label {
@@ -210,15 +270,34 @@
       gap: 0;
     }
     .pillar-redesign {
-      padding: 2.5rem 2.5rem 2.5rem 0;
+      position: relative;
+      padding: 2.5rem 2.5rem 2.5rem 1.75rem;
       border-bottom: 1px solid rgba(255,255,255,0.07);
       display: flex;
       gap: 1.5rem;
       align-items: flex-start;
+      transition: background 0.25s ease;
+    }
+    .pillar-redesign::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 1.75rem;
+      bottom: 1.75rem;
+      width: 2px;
+      background: var(--gold);
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 0.25s ease;
+    }
+    .pillar-redesign:hover {
+      background: rgba(255,255,255,0.02);
+    }
+    .pillar-redesign:hover::before {
+      transform: scaleY(1);
     }
     .pillar-redesign:nth-child(even) {
-      padding-left: 2.5rem;
-      padding-right: 0;
+      padding-left: 2.75rem;
       border-left: 1px solid rgba(255,255,255,0.07);
     }
     .pillar-redesign:nth-last-child(-n+2) {
@@ -226,14 +305,16 @@
     }
     .pillar-num {
       font-family: 'Playfair Display', Georgia, serif;
-      font-size: 3rem;
+      font-size: 2.75rem;
       font-weight: 700;
       color: var(--gold);
-      opacity: 0.25;
+      opacity: 0.3;
       line-height: 1;
       flex-shrink: 0;
       width: 2.5rem;
+      transition: opacity 0.25s ease;
     }
+    .pillar-redesign:hover .pillar-num { opacity: 0.6; }
     .pillar-body h3 {
       font-family: 'Playfair Display', Georgia, serif;
       font-size: 1.2rem;
@@ -401,9 +482,10 @@
       height: 60px;
       font-size: 1.05rem;
       margin: 0 0 1.25rem;
-      background: #0f0c09;
+      background: var(--ink);
       border-radius: 2px;
       letter-spacing: 0.04em;
+      box-shadow: 0 0 0 4px rgba(200,150,62,0.12);
     }
     .team-card h3 {
       font-family: 'Playfair Display', Georgia, serif;
@@ -433,8 +515,19 @@
 
     /* ── CTA ── */
     .cta-section {
-      background: #0f0c09;
+      background: var(--ink);
       padding: 6rem 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(200,150,62,0.5), transparent);
     }
     .cta-inner {
       display: grid;
@@ -442,6 +535,8 @@
       gap: 4rem;
       align-items: center;
       max-width: 1140px;
+      margin: 0;
+      text-align: left;
     }
     .cta-text-block h2 {
       color: #fff;
@@ -482,7 +577,7 @@
 
     /* ── Footer refinement ── */
     footer {
-      background: #0f0c09;
+      background: var(--ink);
       border-top: none;
       padding: 2.5rem 0;
     }
@@ -543,6 +638,7 @@
           <a href="cpe.html" class="btn btn-primary">Learn the CPE Path</a>
           <a href="about.html" class="btn btn-outline-light">Our Mission</a>
         </div>
+        <p class="hero-credibility">Founded by working chaplains at North Shore University Hospital</p>
       </div>
       <span class="hero-scroll">Scroll</span>
     </section>
