@@ -3,12 +3,507 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NMCA</title>
+  <title>NMCA — National Muslim Chaplains Association</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/png" href="images/logo.png" />
   <link rel="stylesheet" href="css/style.css" />
+  <style>
+    /* ── Page-level overrides for the redesigned homepage ── */
+
+    /* Typography upgrade */
+    body {
+      font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+    }
+
+    /* ── Navbar refinement ── */
+    .navbar {
+      border-bottom: 1px solid rgba(200,150,62,0.20);
+      box-shadow: none;
+      height: 68px;
+      backdrop-filter: blur(8px);
+      background: rgba(255,255,255,0.96);
+    }
+    .brand-name {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.88rem;
+      letter-spacing: 0.01em;
+    }
+    .nav-links a {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.875rem;
+      letter-spacing: 0.01em;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 94vh;
+      background:
+        url('https://images.unsplash.com/photo-1585036156171-384164a8c675?w=1800&auto=format&fit=crop&q=80')
+        center 30% / cover no-repeat;
+      align-items: flex-end;
+      padding-bottom: 0;
+    }
+    .hero::before {
+      background: linear-gradient(
+        to right,
+        rgba(15,12,9,0.82) 0%,
+        rgba(15,12,9,0.65) 55%,
+        rgba(15,12,9,0.25) 100%
+      );
+    }
+    .hero::after { display: none; }
+
+    .hero-content {
+      text-align: left;
+      max-width: 1140px;
+      padding: 0 2rem 7rem;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-bismillah {
+      font-size: 1.5rem;
+      color: var(--gold-light);
+      opacity: 0.85;
+      margin-bottom: 1.75rem;
+      display: block;
+    }
+
+    .hero-content h1 {
+      color: #fff;
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      line-height: 1.1;
+      font-weight: 800;
+      margin-bottom: 1.25rem;
+      max-width: 680px;
+      letter-spacing: -0.02em;
+    }
+    .hero-content h1 em {
+      color: var(--gold-light);
+      font-style: italic;
+    }
+
+    .hero-sub {
+      color: rgba(255,255,255,0.75);
+      font-size: 1.05rem;
+      max-width: 520px;
+      margin: 0;
+      line-height: 1.75;
+    }
+
+    .hero-buttons {
+      margin-top: 2.5rem;
+      gap: 0.875rem;
+    }
+    .hero-buttons .btn-primary {
+      background: var(--gold);
+      border-color: var(--gold);
+      padding: 0.8rem 2rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+    .hero-buttons .btn-outline-light {
+      padding: 0.8rem 2rem;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 500;
+    }
+
+    /* Scroll indicator */
+    .hero-scroll {
+      position: absolute;
+      bottom: 2rem;
+      right: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255,255,255,0.45);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .hero-scroll::before {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 36px;
+      background: rgba(255,255,255,0.3);
+    }
+
+    /* ── Mission statement ── */
+    .mission-section {
+      padding: 6rem 0;
+    }
+    .mission-inner {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .mission-label-col {
+      position: sticky;
+      top: 5rem;
+      padding-top: 0.25rem;
+    }
+    .mission-label-col .section-label {
+      writing-mode: vertical-lr;
+      transform: rotate(180deg);
+      letter-spacing: 0.18em;
+      font-size: 0.7rem;
+    }
+    .mission-text-col h2 {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      line-height: 1.15;
+      margin-bottom: 1.5rem;
+      letter-spacing: -0.02em;
+      color: var(--gray-900);
+      max-width: 640px;
+    }
+    .mission-text-col .lead {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: var(--gray-600);
+      max-width: 640px;
+    }
+    .mission-text-col p {
+      font-size: 1rem;
+      line-height: 1.8;
+      max-width: 640px;
+    }
+
+    @media (max-width: 768px) {
+      .mission-inner {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      .mission-label-col {
+        position: static;
+      }
+      .mission-label-col .section-label {
+        writing-mode: horizontal-tb;
+        transform: none;
+      }
+    }
+
+    /* ── Pillars ── */
+    .goals-section {
+      background: #0f0c09;
+      padding: 6rem 0;
+    }
+    .goals-section .section-label {
+      color: var(--gold-light);
+      opacity: 0.7;
+    }
+    .goals-section h2 {
+      color: #fff;
+      font-size: clamp(1.75rem, 3vw, 2.4rem);
+      margin-bottom: 3rem;
+      letter-spacing: -0.02em;
+    }
+
+    .pillars-redesign {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+    }
+    .pillar-redesign {
+      padding: 2.5rem 2.5rem 2.5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+    }
+    .pillar-redesign:nth-child(even) {
+      padding-left: 2.5rem;
+      padding-right: 0;
+      border-left: 1px solid rgba(255,255,255,0.07);
+    }
+    .pillar-redesign:nth-last-child(-n+2) {
+      border-bottom: none;
+    }
+    .pillar-num {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 3rem;
+      font-weight: 700;
+      color: var(--gold);
+      opacity: 0.25;
+      line-height: 1;
+      flex-shrink: 0;
+      width: 2.5rem;
+    }
+    .pillar-body h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.2rem;
+      color: #fff;
+      margin-bottom: 0.6rem;
+      font-weight: 700;
+    }
+    .pillar-body p {
+      font-size: 0.92rem;
+      color: rgba(255,255,255,0.55);
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    @media (max-width: 768px) {
+      .pillars-redesign {
+        grid-template-columns: 1fr;
+      }
+      .pillar-redesign {
+        padding: 2rem 0;
+        border-left: none !important;
+      }
+      .pillar-redesign:nth-last-child(-n+2) {
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+      }
+      .pillar-redesign:last-child {
+        border-bottom: none;
+      }
+    }
+
+    /* ── Why CPE ── */
+    .why-cpe-section {
+      padding: 7rem 0;
+    }
+    .why-cpe-inner {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 6rem;
+      align-items: center;
+    }
+    .why-cpe-text .section-label {
+      margin-bottom: 1rem;
+    }
+    .why-cpe-text h2 {
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+    .why-cpe-text p {
+      font-size: 1rem;
+      line-height: 1.8;
+    }
+    .why-cpe-text .btn {
+      margin-top: 1.5rem;
+    }
+
+    .quote-redesign {
+      background: var(--cream);
+      border-radius: 2px;
+      padding: 3rem 2.5rem;
+      position: relative;
+    }
+    .quote-redesign::before {
+      content: '\201C';
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 8rem;
+      color: var(--gold);
+      opacity: 0.15;
+      position: absolute;
+      top: -1.5rem;
+      left: 1.5rem;
+      line-height: 1;
+    }
+    .quote-redesign .quote-text {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.3rem;
+      line-height: 1.65;
+      color: var(--gray-900);
+      font-style: italic;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+    .quote-redesign .quote-attr {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+    .quote-redesign .quote-attr em {
+      color: var(--gray-400);
+      font-style: normal;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    @media (max-width: 900px) {
+      .why-cpe-inner {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+    }
+
+    /* ── Team preview ── */
+    .team-preview {
+      background: var(--cream);
+      padding: 6rem 0;
+    }
+    .team-preview-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      margin-bottom: 3rem;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .team-preview-header h2 {
+      font-size: clamp(1.75rem, 3vw, 2.4rem);
+      letter-spacing: -0.02em;
+      margin-bottom: 0;
+    }
+    .team-preview-header p {
+      max-width: 400px;
+      font-size: 0.95rem;
+      color: var(--gray-600);
+      margin: 0;
+    }
+    .team-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin: 0;
+    }
+    .team-card {
+      border-radius: 2px;
+      border: 1px solid rgba(200,150,62,0.15);
+      padding: 2.5rem 2rem 2rem;
+      background: #fff;
+      box-shadow: none;
+      transition: border-color 0.2s, transform 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .team-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease;
+    }
+    .team-card:hover::before { transform: scaleX(1); }
+    .team-card:hover {
+      border-color: rgba(200,150,62,0.35);
+      transform: translateY(-3px);
+    }
+    .team-avatar {
+      width: 60px;
+      height: 60px;
+      font-size: 1.05rem;
+      margin: 0 0 1.25rem;
+      background: #0f0c09;
+      border-radius: 2px;
+      letter-spacing: 0.04em;
+    }
+    .team-card h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.15rem;
+      color: var(--gray-900);
+      margin-bottom: 0.35rem;
+    }
+    .team-card p {
+      font-size: 0.83rem;
+      color: var(--gray-400);
+      line-height: 1.5;
+    }
+    .team-preview-footer {
+      text-align: center;
+      margin-top: 2.5rem;
+    }
+
+    @media (max-width: 768px) {
+      .team-preview-grid {
+        grid-template-columns: 1fr;
+      }
+      .team-preview-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      background: #0f0c09;
+      padding: 6rem 0;
+    }
+    .cta-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 4rem;
+      align-items: center;
+      max-width: 1140px;
+    }
+    .cta-text-block h2 {
+      color: #fff;
+      font-size: clamp(1.75rem, 3vw, 2.6rem);
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .cta-text-block p {
+      color: rgba(255,255,255,0.6);
+      font-size: 1rem;
+      max-width: 480px;
+      margin: 0;
+    }
+    .cta-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      flex-shrink: 0;
+    }
+    .cta-actions .btn {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 600;
+      padding: 0.875rem 2rem;
+      white-space: nowrap;
+      min-width: 200px;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .cta-inner {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        text-align: center;
+      }
+      .cta-text-block p { margin: 0 auto; }
+      .cta-actions { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+    }
+
+    /* ── Footer refinement ── */
+    footer {
+      background: #0f0c09;
+      border-top: none;
+      padding: 2.5rem 0;
+    }
+    .footer-inner {
+      gap: 1.25rem;
+    }
+    .footer-brand .brand-name {
+      color: rgba(255,255,255,0.5);
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+    .footer-nav a {
+      color: rgba(255,255,255,0.3);
+      font-size: 0.82rem;
+    }
+    .footer-nav a:hover { color: var(--gold); }
+    .footer-copy {
+      color: rgba(255,255,255,0.2);
+      font-size: 0.78rem;
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -37,8 +532,8 @@
     <section class="hero">
       <div class="hero-overlay"></div>
       <div class="hero-content">
-        <p class="hero-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
-        <h1>Serving Humanity Through <em>Spiritual Care</em></h1>
+        <span class="hero-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</span>
+        <h1>Serving Humanity<br />Through <em>Spiritual Care</em></h1>
         <p class="hero-sub">
           Empowering Muslims across the United States to become accredited,
           professional chaplains — answering the call to serve in hospitals,
@@ -46,71 +541,80 @@
         </p>
         <div class="hero-buttons">
           <a href="cpe.html" class="btn btn-primary">Learn the CPE Path</a>
-          <a href="about.html" class="btn btn-outline">Our Mission</a>
+          <a href="about.html" class="btn btn-outline-light">Our Mission</a>
         </div>
       </div>
+      <span class="hero-scroll">Scroll</span>
     </section>
 
     <!-- Mission Statement -->
     <section class="section mission-section">
       <div class="container">
-        <div class="section-label">Mission Statement</div>
-        <h2>Why Muslim Chaplaincy Matters</h2>
-        <p class="lead">
-          Muslim chaplains serve people of all faiths and none, offering
-          compassionate spiritual care rooted in professional chaplaincy and
-          informed by the Islamic tradition. Their presence enriches
-          interdisciplinary care teams, strengthens culturally responsive care,
-          and helps ensure that spiritual support reflects the diverse
-          communities they serve.
-        </p>
-        <p>
-          The National Muslim Chaplains Association (NMCA) exists to advance
-          the profession of Muslim chaplaincy through education, mentorship,
-          professional development, and collaboration. We prepare and support
-          Muslim chaplains across healthcare, higher education, corrections,
-          hospice, the military, and community settings, helping cultivate
-          spiritually grounded, clinically prepared, and ethically committed
-          leaders who serve with excellence and compassion.
-        </p>
+        <div class="mission-inner">
+          <div class="mission-label-col">
+            <div class="section-label">Mission</div>
+          </div>
+          <div class="mission-text-col">
+            <h2>Why Muslim Chaplaincy Matters</h2>
+            <p class="lead">
+              Muslim chaplains serve people of all faiths and none, offering
+              compassionate spiritual care rooted in professional chaplaincy and
+              informed by the Islamic tradition.
+            </p>
+            <p>
+              Their presence enriches interdisciplinary care teams, strengthens
+              culturally responsive care, and ensures spiritual support reflects
+              the communities they serve. The National Muslim Chaplains Association
+              (NMCA) exists to advance this profession through education,
+              mentorship, professional development, and collaboration — preparing
+              chaplains across healthcare, higher education, corrections, hospice,
+              the military, and community settings.
+            </p>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Goals -->
-    <section class="section goals-section bg-light">
+    <!-- Pillars -->
+    <section class="section goals-section">
       <div class="container">
         <div class="section-label">Our Goals</div>
-        <h2>Our Pillars</h2>
-        <div class="pillars-list">
-          <div class="pillar-item">
-            <h3>Education</h3>
-            <p>
-              Provide accessible education on Clinical Pastoral Education (CPE), professional certification, and the pathways to a career in chaplaincy — equipping aspiring Muslim chaplains with the knowledge to begin and grow in the profession.
-            </p>
+        <h2>Five Pillars of Our Work</h2>
+        <div class="pillars-redesign">
+          <div class="pillar-redesign">
+            <span class="pillar-num">1</span>
+            <div class="pillar-body">
+              <h3>Education</h3>
+              <p>Accessible pathways into CPE, professional certification, and career guidance — equipping aspiring Muslim chaplains with everything they need to begin and grow.</p>
+            </div>
           </div>
-          <div class="pillar-item">
-            <h3>Mentorship</h3>
-            <p>
-              Connect aspiring and early-career Muslim chaplains with experienced professionals who provide guidance, encouragement, and practical insight throughout their professional journey.
-            </p>
+          <div class="pillar-redesign">
+            <span class="pillar-num">2</span>
+            <div class="pillar-body">
+              <h3>Mentorship</h3>
+              <p>Connecting aspiring chaplains with experienced professionals who offer guidance, encouragement, and practical insight throughout the journey.</p>
+            </div>
           </div>
-          <div class="pillar-item">
-            <h3>Advancement</h3>
-            <p>
-              Increase the presence of qualified Muslim chaplains across healthcare, higher education, corrections, hospice, the military, and community settings through education, advocacy, and professional development.
-            </p>
+          <div class="pillar-redesign">
+            <span class="pillar-num">3</span>
+            <div class="pillar-body">
+              <h3>Advancement</h3>
+              <p>Growing the presence of Muslim chaplains across every institutional setting through targeted education, advocacy, and professional development.</p>
+            </div>
           </div>
-          <div class="pillar-item">
-            <h3>Community</h3>
-            <p>
-              Build a national network of Muslim chaplains and CPE students so that practitioners across the country are connected, resourced, and mutually supported.
-            </p>
+          <div class="pillar-redesign">
+            <span class="pillar-num">4</span>
+            <div class="pillar-body">
+              <h3>Community</h3>
+              <p>Building a national network so chaplains and CPE students are connected, resourced, and mutually supported wherever they are in the country.</p>
+            </div>
           </div>
-          <div class="pillar-item">
-            <h3>Resources</h3>
-            <p>
-              Develop practical tools, guides, templates, research, and educational materials that support Muslim chaplains, students, institutions, and communities.
-            </p>
+          <div class="pillar-redesign">
+            <span class="pillar-num">5</span>
+            <div class="pillar-body">
+              <h3>Resources</h3>
+              <p>Practical tools, guides, templates, and educational materials that support chaplains, students, institutions, and the broader Muslim community.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -118,46 +622,51 @@
 
     <!-- Why CPE -->
     <section class="section why-cpe-section">
-      <div class="container two-col">
-        <div class="two-col-text">
-          <div class="section-label">Why CPE?</div>
-          <h2>The Gold Standard of Spiritual Care</h2>
-          <p>
-            Clinical Pastoral Education (CPE) is the nationally and
-            internationally recognized standard for professional spiritual
-            care and education. Developed over decades and supervised by
-            accredited educators, CPE trains chaplains to provide
-            compassionate, evidence-informed spiritual support in the most
-            demanding environments.
-          </p>
-          <p>
-            For Muslim communities, CPE is the gateway to recognition,
-            credentialing, and employment as a professional chaplain. It is
-            not just training — it is the foundation of a lifetime of service.
-          </p>
-          <a href="cpe.html" class="btn btn-primary">Explore the CPE Process &rarr;</a>
-        </div>
-        <div class="two-col-visual">
-          <div class="quote-card">
+      <div class="container">
+        <div class="why-cpe-inner">
+          <div class="why-cpe-text">
+            <div class="section-label">Why CPE?</div>
+            <h2>The Gold Standard of Spiritual Care</h2>
+            <p>
+              Clinical Pastoral Education (CPE) is the nationally and
+              internationally recognized standard for professional spiritual
+              care. Developed over decades and supervised by accredited
+              educators, CPE trains chaplains to provide compassionate,
+              evidence-informed support in the most demanding environments.
+            </p>
+            <p>
+              For Muslim communities, CPE is the gateway to recognition,
+              credentialing, and employment as a professional chaplain. It
+              is not just training — it is the foundation of a lifetime of service.
+            </p>
+            <a href="cpe.html" class="btn btn-outline">Explore the CPE Process &rarr;</a>
+          </div>
+          <div class="quote-redesign">
             <p class="quote-text">
               "The best of people are those who are most beneficial to people."
             </p>
-            <p class="quote-attr">— Prophet Muhammad ﷺ <br /><em>(Al-Mu'jam al-Awsat)</em></p>
+            <p class="quote-attr">
+              Prophet Muhammad ﷺ<br />
+              <em>Al-Mu'jam al-Awsat</em>
+            </p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Meet the Team Preview -->
-    <section class="section team-preview bg-light">
+    <!-- Team Preview -->
+    <section class="section team-preview">
       <div class="container">
-        <div class="section-label">Our Founders</div>
-        <h2>Led by Working Chaplains</h2>
-        <p class="lead">
-          Our founders are not theorists — they are active chaplaincy
-          professionals at North Shore University Hospital, walking the halls
-          every day and doing the work.
-        </p>
+        <div class="team-preview-header">
+          <div>
+            <div class="section-label">Our Founders</div>
+            <h2>Led by Working Chaplains</h2>
+          </div>
+          <p>
+            Not theorists — active professionals walking the halls of
+            hospitals every day, doing the work they teach.
+          </p>
+        </div>
         <div class="team-preview-grid">
           <a href="team.html#abdurrahman" class="team-card">
             <div class="team-avatar">AK</div>
@@ -167,32 +676,35 @@
           <a href="team.html#zuhaib" class="team-card">
             <div class="team-avatar">ZW</div>
             <h3>Zuhaib Waqar</h3>
-            <p>Certified Educator Candidate (CEC)<br />North Shore University Hospital</p>
+            <p>Certified Educator Candidate<br />North Shore University Hospital</p>
           </a>
           <a href="team.html#ibraheem" class="team-card">
             <div class="team-avatar">MI</div>
             <h3>Muhammad Ibraheem</h3>
-            <p>Certified Educator Candidate (CEC)<br />Baptist Health, Jacksonville</p>
+            <p>Certified Educator Candidate<br />Baptist Health, Jacksonville</p>
           </a>
         </div>
-        <div class="center-cta">
+        <div class="team-preview-footer">
           <a href="team.html" class="btn btn-outline">Read Our Stories &rarr;</a>
         </div>
       </div>
     </section>
 
-    <!-- Call to Action -->
+    <!-- CTA -->
     <section class="section cta-section">
-      <div class="container cta-inner">
-        <h2>Ready to Answer the Call?</h2>
-        <p>
-          Whether you are just curious about chaplaincy or ready to begin
-          your CPE application, we are here to walk with you every step
-          of the way.
-        </p>
-        <div class="hero-buttons">
-          <a href="cpe.html" class="btn btn-primary">Start Your Journey</a>
-          <a href="contact.html" class="btn btn-outline-light">Get in Touch</a>
+      <div class="container">
+        <div class="cta-inner">
+          <div class="cta-text-block">
+            <h2>Ready to Answer the Call?</h2>
+            <p>
+              Whether you are just curious about chaplaincy or ready to begin
+              your CPE application, we are here to walk with you every step of the way.
+            </p>
+          </div>
+          <div class="cta-actions">
+            <a href="cpe.html" class="btn btn-primary">Start Your Journey</a>
+            <a href="contact.html" class="btn btn-outline-light">Get in Touch</a>
+          </div>
         </div>
       </div>
     </section>
@@ -201,10 +713,10 @@
   <footer>
     <div class="container footer-inner">
       <div class="footer-brand" style="display:flex;align-items:center;gap:0.75rem;">
-        <img src="images/logo.png" alt="NMCA Logo" style="height:48px;width:48px;object-fit:contain;border-radius:50%;">
+        <img src="images/logo.png" alt="NMCA Logo" style="height:40px;width:40px;object-fit:contain;border-radius:4px;opacity:0.6;">
         <div>
           <span class="brand-name">National Muslim Chaplains Association</span>
-          </div>
+        </div>
       </div>
       <nav class="footer-nav">
         <a href="index.html">Home</a>
