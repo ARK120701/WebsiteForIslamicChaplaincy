@@ -6,32 +6,59 @@
   <title>NMCA — National Muslim Chaplains Association</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500;1,9..144,600;1,9..144,700&family=Public+Sans:wght@400;500;600;700;800&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet" />
   <link rel="icon" type="image/png" href="images/logo.png" />
   <link rel="stylesheet" href="css/style.css" />
   <style>
-    /* ── Page-level overrides for the redesigned homepage ── */
+    /* ═══════════════════════════════════════════════════════════
+       Homepage redesign — "The Threshold"
+       Signature motif: the nested archway from the NMCA seal,
+       carried through as a hero frame, a scalloped horizon at the
+       hero/mission seam, and small arch badges for people.
+       Palette anchors on the seal's deep emerald + gold rather
+       than a generic near-black background.
+       ═══════════════════════════════════════════════════════════ */
 
     :root {
-      --ink: #18140f;
-      --ink-soft: rgba(255,255,255,0.55);
+      --emerald-950: #0e2a1c;
+      --emerald-900: #143624;
+      --emerald-800: #1c4531;
+      --emerald-700: #26573f;
+      --emerald-600: #35714f;
+      --gold:        #c9974a;
+      --gold-light:  #e8c78a;
+      --gold-deep:   #a97a35;
+      --parchment:   #f8f4ea;
+      --parchment-deep: #efe6d1;
+      --ink:         #1c1810;
+      --ink-soft:    #5c5748;
+      --gray-900:    var(--ink);
+      --gray-600:    var(--ink-soft);
+      --font-display: 'Fraunces', Georgia, serif;
+      --font-sans:    'Public Sans', 'Inter', system-ui, sans-serif;
     }
 
-    /* Typography upgrade */
     body {
-      font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+      font-family: var(--font-sans);
+      background: var(--parchment);
     }
-
-    /* Top accent bar */
     body::before {
       content: '';
       display: block;
       height: 3px;
       width: 100%;
-      background: linear-gradient(90deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold) 100%);
+      background: linear-gradient(90deg, var(--gold-deep) 0%, var(--gold-light) 50%, var(--gold-deep) 100%);
+    }
+    h1, h2, h3, h4 {
+      font-family: var(--font-display);
+      color: var(--ink);
+    }
+    .section-label {
+      font-family: var(--font-sans);
+      color: var(--gold-deep);
     }
 
-    /* Shared eyebrow treatment for section labels */
+    /* Shared eyebrow rule */
     .goals-section .section-label,
     .why-cpe-text .section-label,
     .team-preview-header .section-label {
@@ -50,98 +77,124 @@
       opacity: 0.55;
     }
 
-    /* ── Navbar refinement ── */
+    /* ── Navbar ── */
     .navbar {
-      border-bottom: 1px solid rgba(200,150,62,0.20);
+      border-bottom: 1px solid rgba(201,151,74,0.32);
       box-shadow: none;
-      height: 68px;
+      height: 72px;
       backdrop-filter: blur(8px);
-      background: rgba(255,255,255,0.96);
+      background: rgba(248,244,234,0.94);
     }
     .brand-name {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.88rem;
+      font-family: var(--font-sans);
+      color: var(--emerald-800);
+      font-size: 0.9rem;
       letter-spacing: 0.01em;
     }
     .nav-links a {
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: var(--font-sans);
       font-size: 0.875rem;
+      color: var(--ink-soft);
       letter-spacing: 0.01em;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0.9rem; right: 0.9rem; bottom: 0.3rem;
+      height: 2px;
+      background: var(--gold);
+      transform: scaleX(0);
+      transition: transform 0.2s ease;
+    }
+    .nav-links a:hover,
+    .nav-links a.active {
+      background: rgba(201,151,74,0.12);
+      color: var(--gold-deep);
+    }
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+      transform: scaleX(1);
     }
 
     /* ── Hero ── */
     .hero {
-      min-height: 92vh;
-      background:
-        url('https://images.unsplash.com/photo-1585036156171-384164a8c675?w=1800&auto=format&fit=crop&q=80')
-        center 30% / cover no-repeat;
-      align-items: flex-end;
-      padding-bottom: 0;
+      display: block;
+      position: relative;
+      min-height: auto;
+      background: linear-gradient(165deg, var(--emerald-900) 0%, var(--emerald-950) 65%);
+      overflow: visible;
+      padding: 5.5rem 0 0;
     }
-    .hero::before {
-      background: linear-gradient(
-        to right,
-        rgba(24,20,15,0.86) 0%,
-        rgba(24,20,15,0.68) 55%,
-        rgba(24,20,15,0.28) 100%
-      );
-    }
-    .hero::after { display: none; }
+    .hero::before, .hero::after { display: none; }
 
-    .hero-content {
-      text-align: left;
-      max-width: 1140px;
-      padding: 0 2rem 6rem;
-      margin: 0 auto;
-      width: 100%;
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 3rem;
+      align-items: center;
+      padding-bottom: 4.5rem;
     }
+
+    .hero-copy { max-width: 620px; }
 
     .hero-bismillah {
-      font-size: 1.5rem;
+      font-family: 'Amiri', serif;
+      font-size: 1.6rem;
       color: var(--gold-light);
-      opacity: 0.85;
+      opacity: 0.9;
       margin-bottom: 1.75rem;
       display: block;
+      direction: rtl;
+      text-shadow: 0 0 24px rgba(201,151,74,0.35);
     }
 
-    .hero-content h1 {
+    .hero-copy h1 {
       color: #fff;
-      font-size: clamp(2.4rem, 5vw, 4rem);
-      line-height: 1.1;
-      font-weight: 800;
+      font-size: clamp(2.3rem, 4vw, 3.3rem);
+      line-height: 1.08;
+      font-weight: 700;
       margin-bottom: 1.25rem;
-      max-width: 680px;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.01em;
     }
-    .hero-content h1 em {
+    .hero-copy h1 em {
       color: var(--gold-light);
       font-style: italic;
+      font-weight: 500;
     }
 
     .hero-sub {
-      color: rgba(255,255,255,0.75);
+      color: rgba(248,244,234,0.72);
       font-size: 1.05rem;
-      max-width: 520px;
+      max-width: 480px;
       margin: 0;
       line-height: 1.75;
     }
 
     .hero-buttons {
-      margin-top: 2.5rem;
+      margin-top: 2.25rem;
       gap: 0.875rem;
     }
     .hero-buttons .btn-primary {
       background: var(--gold);
       border-color: var(--gold);
+      color: var(--emerald-950);
       padding: 0.8rem 2rem;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 600;
+      font-family: var(--font-sans);
+      font-weight: 700;
       letter-spacing: 0.01em;
+    }
+    .hero-buttons .btn-primary:hover {
+      background: var(--gold-light);
+      border-color: var(--gold-light);
     }
     .hero-buttons .btn-outline-light {
       padding: 0.8rem 2rem;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-family: var(--font-sans);
       font-weight: 500;
+      border-color: rgba(248,244,234,0.4);
     }
 
     .hero-credibility {
@@ -149,7 +202,7 @@
       align-items: center;
       gap: 0.6rem;
       margin-top: 2.25rem;
-      color: var(--ink-soft);
+      color: rgba(248,244,234,0.5);
       font-size: 0.82rem;
       letter-spacing: 0.02em;
     }
@@ -158,46 +211,84 @@
       display: block;
       width: 20px;
       height: 1px;
-      background: rgba(255,255,255,0.35);
+      background: var(--gold);
+      opacity: 0.6;
       flex-shrink: 0;
     }
 
-    /* Scroll indicator */
-    .hero-scroll {
-      position: absolute;
-      bottom: 2rem;
-      right: 2rem;
+    /* Signature: nested archway frame, echoing the NMCA seal */
+    .hero-arch {
       display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: rgba(255,255,255,0.45);
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      justify-content: center;
     }
-    .hero-scroll::before {
+    .hero-arch-outer {
+      position: relative;
+      width: min(320px, 84vw);
+      padding: 16px;
+      border: 1px solid rgba(201,151,74,0.65);
+      border-radius: 999px 999px 14px 14px;
+    }
+    .hero-arch-outer::before {
       content: '';
-      display: block;
-      width: 1px;
-      height: 36px;
-      background: rgba(255,255,255,0.3);
+      position: absolute;
+      inset: 7px;
+      border: 1px solid rgba(201,151,74,0.4);
+      border-radius: 999px 999px 10px 10px;
+      pointer-events: none;
+    }
+    .hero-arch-frame {
+      border-radius: 999px 999px 8px 8px;
+      overflow: hidden;
+      aspect-ratio: 3 / 4;
+      box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5);
+    }
+    .hero-arch-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: saturate(0.92) contrast(1.03);
+    }
+
+    /* Scalloped horizon — the threshold seam between hero and mission */
+    .hero-scallop {
+      position: relative;
+      height: 30px;
+      background:
+        radial-gradient(circle at 15px 0, transparent 15px, var(--parchment) 16px) 0 0 / 30px 30px repeat-x;
+    }
+
+    @media (max-width: 900px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+        padding-bottom: 3.5rem;
+      }
+      .hero-copy { max-width: 100%; margin: 0 auto; }
+      .hero-sub { margin: 0 auto; }
+      .hero-buttons { justify-content: center; }
+      .hero-credibility { justify-content: center; }
+      .hero-credibility::before { display: none; }
+      .hero-arch { order: -1; }
+      .hero-arch-outer { width: min(260px, 70vw); }
     }
 
     /* ── Mission statement ── */
-    .mission-section {
-      padding: 6rem 0;
-    }
+    .mission-section { padding: 6rem 0; }
     .mission-inner {
       display: grid;
       grid-template-columns: 200px 1fr;
       gap: 4rem;
       align-items: start;
     }
-    .mission-label-col {
-      position: sticky;
-      top: 5rem;
-      padding-top: 0.25rem;
+    .mission-label-col { position: sticky; top: 5rem; padding-top: 0.25rem; display: flex; align-items: center; gap: 0.85rem; }
+    .mission-label-col::before {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(var(--gold), transparent);
+      opacity: 0.7;
+      flex-shrink: 0;
     }
     .mission-label-col .section-label {
       writing-mode: vertical-lr;
@@ -209,70 +300,65 @@
       font-size: clamp(1.75rem, 3vw, 2.5rem);
       line-height: 1.15;
       margin-bottom: 1.5rem;
-      letter-spacing: -0.02em;
-      color: var(--gray-900);
+      letter-spacing: -0.01em;
       max-width: 640px;
+      position: relative;
+      display: inline-block;
+    }
+    .mission-text-col h2::after {
+      content: '';
+      display: block;
+      width: 56px;
+      height: 2px;
+      margin-top: 0.85rem;
+      background: var(--gold);
     }
     .mission-text-col .lead {
-      font-size: 1.1rem;
-      line-height: 1.8;
-      color: var(--gray-600);
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: 1.25rem;
+      line-height: 1.6;
+      color: var(--ink);
       max-width: 640px;
     }
     .mission-text-col .lead::first-letter {
-      font-family: var(--font-serif);
       font-size: 3.2rem;
       font-weight: 700;
-      color: var(--gold);
+      color: var(--gold-deep);
       float: left;
       line-height: 0.8;
       padding: 0.15rem 0.4rem 0 0;
     }
-    .mission-text-col p {
+    .mission-text-col p:not(.lead) {
+      font-family: var(--font-sans);
       font-size: 1rem;
       line-height: 1.8;
       max-width: 640px;
+      color: var(--ink-soft);
     }
 
     @media (max-width: 768px) {
-      .mission-inner {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-      }
-      .mission-label-col {
-        position: static;
-      }
-      .mission-label-col .section-label {
-        writing-mode: horizontal-tb;
-        transform: none;
-      }
+      .mission-inner { grid-template-columns: 1fr; gap: 1.5rem; }
+      .mission-label-col { position: static; }
+      .mission-label-col::before { width: 28px; height: 1px; background: linear-gradient(90deg, var(--gold), transparent); }
+      .mission-label-col .section-label { writing-mode: horizontal-tb; transform: none; }
     }
 
     /* ── Pillars ── */
-    .goals-section {
-      background: var(--ink);
-      padding: 6rem 0;
-    }
-    .goals-section .section-label {
-      color: var(--gold-light);
-      opacity: 0.7;
-    }
+    .goals-section { background: var(--emerald-950); padding: 6rem 0; }
+    .goals-section .section-label { color: var(--gold-light); opacity: 0.75; }
     .goals-section h2 {
       color: #fff;
       font-size: clamp(1.75rem, 3vw, 2.4rem);
       margin-bottom: 3rem;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.01em;
     }
 
-    .pillars-redesign {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-    }
+    .pillars-redesign { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-top: 1px solid rgba(201,151,74,0.25); }
     .pillar-redesign {
       position: relative;
       padding: 2.5rem 2.5rem 2.5rem 1.75rem;
-      border-bottom: 1px solid rgba(255,255,255,0.07);
+      border-bottom: 1px solid rgba(248,244,234,0.08);
       display: flex;
       gap: 1.5rem;
       align-items: flex-start;
@@ -281,149 +367,136 @@
     .pillar-redesign::before {
       content: '';
       position: absolute;
-      left: 0;
-      top: 1.75rem;
-      bottom: 1.75rem;
+      left: 0; top: 1.75rem; bottom: 1.75rem;
       width: 2px;
       background: var(--gold);
-      transform: scaleY(0);
-      transform-origin: top;
-      transition: transform 0.25s ease;
+      opacity: 0.35;
+      transform: scaleY(0.4);
+      transform-origin: center;
+      transition: transform 0.25s ease, opacity 0.25s ease;
     }
-    .pillar-redesign:hover {
-      background: rgba(255,255,255,0.02);
-    }
-    .pillar-redesign:hover::before {
-      transform: scaleY(1);
-    }
+    .pillar-redesign:hover { background: rgba(248,244,234,0.03); }
+    .pillar-redesign:hover::before { transform: scaleY(1); opacity: 1; }
     .pillar-redesign:nth-child(even) {
       padding-left: 2.75rem;
-      border-left: 1px solid rgba(255,255,255,0.07);
+      border-left: 1px solid rgba(248,244,234,0.08);
     }
-    .pillar-redesign:nth-last-child(-n+2) {
-      border-bottom: none;
-    }
+    .pillar-redesign:nth-last-child(-n+2) { border-bottom: none; }
     .pillar-num {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 2.75rem;
-      font-weight: 700;
+      font-family: var(--font-display);
+      font-style: italic;
+      font-weight: 500;
+      font-size: 1.9rem;
       color: var(--gold);
-      opacity: 0.3;
+      opacity: 0.7;
       line-height: 1;
       flex-shrink: 0;
       width: 2.5rem;
       transition: opacity 0.25s ease;
     }
-    .pillar-redesign:hover .pillar-num { opacity: 0.6; }
+    .pillar-redesign:hover .pillar-num { opacity: 1; }
     .pillar-body h3 {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: var(--font-display);
       font-size: 1.2rem;
       color: #fff;
       margin-bottom: 0.6rem;
-      font-weight: 700;
+      font-weight: 600;
     }
     .pillar-body p {
+      font-family: var(--font-sans);
       font-size: 0.92rem;
-      color: rgba(255,255,255,0.55);
+      color: rgba(248,244,234,0.55);
       line-height: 1.7;
       margin: 0;
     }
 
     @media (max-width: 768px) {
-      .pillars-redesign {
-        grid-template-columns: 1fr;
-      }
-      .pillar-redesign {
-        padding: 2rem 0;
-        border-left: none !important;
-      }
-      .pillar-redesign:nth-last-child(-n+2) {
-        border-bottom: 1px solid rgba(255,255,255,0.07);
-      }
-      .pillar-redesign:last-child {
-        border-bottom: none;
-      }
+      .pillars-redesign { grid-template-columns: 1fr; }
+      .pillar-redesign { padding: 2rem 0; border-left: none !important; }
+      .pillar-redesign:nth-last-child(-n+2) { border-bottom: 1px solid rgba(248,244,234,0.08); }
+      .pillar-redesign:last-child { border-bottom: none; }
     }
 
     /* ── Why CPE ── */
-    .why-cpe-section {
-      padding: 7rem 0;
-    }
+    .why-cpe-section { padding: 7rem 0; }
     .why-cpe-inner {
       display: grid;
       grid-template-columns: 1fr 420px;
       gap: 6rem;
       align-items: center;
     }
-    .why-cpe-text .section-label {
-      margin-bottom: 1rem;
-    }
+    .why-cpe-text .section-label { margin-bottom: 1rem; }
     .why-cpe-text h2 {
       font-size: clamp(1.75rem, 3vw, 2.5rem);
-      letter-spacing: -0.02em;
+      letter-spacing: -0.01em;
       margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
     }
-    .why-cpe-text p {
-      font-size: 1rem;
-      line-height: 1.8;
+    .why-cpe-text h2::after {
+      content: '';
+      display: block;
+      width: 56px;
+      height: 2px;
+      margin-top: 0.85rem;
+      background: var(--gold);
     }
-    .why-cpe-text .btn {
-      margin-top: 1.5rem;
-    }
+    .why-cpe-text p { font-family: var(--font-sans); font-size: 1rem; line-height: 1.8; color: var(--ink-soft); }
+    .why-cpe-text .btn { margin-top: 1.5rem; }
 
     .quote-redesign {
-      background: var(--cream);
-      border-radius: 2px;
-      padding: 3rem 2.5rem;
+      background: var(--emerald-950);
+      border: 1px solid rgba(201,151,74,0.3);
+      border-radius: 4px 28px 4px 4px;
+      padding: 3rem 2.75rem 2.75rem;
       position: relative;
     }
     .quote-redesign::before {
       content: '\201C';
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 8rem;
-      color: var(--gold);
-      opacity: 0.15;
-      position: absolute;
-      top: -1.5rem;
-      left: 1.5rem;
+      font-family: var(--font-display);
+      font-size: 5rem;
       line-height: 1;
+      color: var(--gold);
+      opacity: 0.35;
+      position: absolute;
+      top: 1.1rem;
+      left: 1.9rem;
     }
     .quote-redesign .quote-text {
-      font-family: 'Playfair Display', Georgia, serif;
+      font-family: var(--font-display);
+      font-weight: 500;
       font-size: 1.3rem;
-      line-height: 1.65;
-      color: var(--gray-900);
+      line-height: 1.6;
+      color: #fff;
       font-style: italic;
       margin-bottom: 1.5rem;
       position: relative;
       z-index: 1;
     }
     .quote-redesign .quote-attr {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: var(--gold);
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--gold-light);
       letter-spacing: 0.05em;
       text-transform: uppercase;
     }
     .quote-redesign .quote-attr em {
-      color: var(--gray-400);
+      color: rgba(248,244,234,0.45);
       font-style: normal;
       text-transform: none;
       letter-spacing: 0;
     }
 
     @media (max-width: 900px) {
-      .why-cpe-inner {
-        grid-template-columns: 1fr;
-        gap: 3rem;
-      }
+      .why-cpe-inner { grid-template-columns: 1fr; gap: 3rem; }
     }
 
     /* ── Team preview ── */
-    .team-preview {
-      background: var(--cream);
-      padding: 6rem 0;
+    .team-preview { background: var(--parchment-deep); padding: 6rem 0 4rem; }
+    .team-scallop {
+      height: 30px;
+      background: radial-gradient(circle at 15px 30px, transparent 15px, var(--emerald-950) 16px) 0 0 / 30px 30px repeat-x;
     }
     .team-preview-header {
       display: flex;
@@ -435,26 +508,26 @@
     }
     .team-preview-header h2 {
       font-size: clamp(1.75rem, 3vw, 2.4rem);
-      letter-spacing: -0.02em;
+      letter-spacing: -0.01em;
       margin-bottom: 0;
+      position: relative;
+      display: inline-block;
     }
-    .team-preview-header p {
-      max-width: 400px;
-      font-size: 0.95rem;
-      color: var(--gray-600);
-      margin: 0;
+    .team-preview-header h2::after {
+      content: '';
+      display: block;
+      width: 56px;
+      height: 2px;
+      margin-top: 0.85rem;
+      background: var(--gold);
     }
-    .team-preview-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-      margin: 0;
-    }
+    .team-preview-header p { max-width: 400px; font-family: var(--font-sans); font-size: 0.95rem; color: var(--ink-soft); margin: 0; }
+    .team-preview-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin: 0; }
     .team-card {
-      border-radius: 2px;
-      border: 1px solid rgba(200,150,62,0.15);
-      padding: 2.5rem 2rem 2rem;
-      background: #fff;
+      border-radius: 10px;
+      border: 1px solid rgba(201,151,74,0.25);
+      padding: 2rem 2rem 2rem;
+      background: var(--parchment);
       box-shadow: none;
       transition: border-color 0.2s, transform 0.2s;
       position: relative;
@@ -463,71 +536,45 @@
     .team-card::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
+      top: 0; left: 0; right: 0; height: 3px;
       background: var(--gold);
-      transform: scaleX(0);
+      transform: scaleX(0.28);
       transform-origin: left;
       transition: transform 0.25s ease;
     }
     .team-card:hover::before { transform: scaleX(1); }
-    .team-card:hover {
-      border-color: rgba(200,150,62,0.35);
-      transform: translateY(-3px);
-    }
+    .team-card:hover { border-color: rgba(201,151,74,0.5); transform: translateY(-3px); }
     .team-avatar {
-      width: 60px;
-      height: 60px;
-      font-size: 1.05rem;
+      width: 58px;
+      height: 70px;
+      font-family: var(--font-sans);
+      font-size: 1rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin: 0 0 1.25rem;
-      background: var(--ink);
-      border-radius: 2px;
+      background: var(--emerald-950);
+      color: var(--gold-light);
+      border-radius: 999px 999px 4px 4px;
       letter-spacing: 0.04em;
-      box-shadow: 0 0 0 4px rgba(200,150,62,0.12);
+      box-shadow: 0 0 0 3px rgba(201,151,74,0.15);
     }
-    .team-card h3 {
-      font-family: 'Playfair Display', Georgia, serif;
-      font-size: 1.15rem;
-      color: var(--gray-900);
-      margin-bottom: 0.35rem;
-    }
-    .team-card p {
-      font-size: 0.83rem;
-      color: var(--gray-400);
-      line-height: 1.5;
-    }
-    .team-preview-footer {
-      text-align: center;
-      margin-top: 2.5rem;
-    }
+    .team-card h3 { font-family: var(--font-display); font-size: 1.15rem; color: var(--ink); margin-bottom: 0.35rem; }
+    .team-card p { font-family: var(--font-sans); font-size: 0.83rem; color: var(--ink-soft); line-height: 1.5; }
+    .team-preview-footer { text-align: center; margin-top: 2.5rem; }
 
     @media (max-width: 768px) {
-      .team-preview-grid {
-        grid-template-columns: 1fr;
-      }
-      .team-preview-header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+      .team-preview-grid { grid-template-columns: 1fr; }
+      .team-preview-header { flex-direction: column; align-items: flex-start; }
     }
 
     /* ── CTA ── */
     .cta-section {
-      background: var(--ink);
-      padding: 6rem 0;
+      background: var(--emerald-950);
+      padding: 6.5rem 0 6rem;
       position: relative;
-      overflow: hidden;
-    }
-    .cta-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(200,150,62,0.5), transparent);
+      overflow: visible;
     }
     .cta-inner {
       display: grid;
@@ -541,63 +588,54 @@
     .cta-text-block h2 {
       color: #fff;
       font-size: clamp(1.75rem, 3vw, 2.6rem);
-      letter-spacing: -0.02em;
+      letter-spacing: -0.01em;
       margin-bottom: 1rem;
+      position: relative;
+      display: inline-block;
     }
-    .cta-text-block p {
-      color: rgba(255,255,255,0.6);
-      font-size: 1rem;
-      max-width: 480px;
-      margin: 0;
+    .cta-text-block h2::before {
+      content: '';
+      display: block;
+      width: 56px;
+      height: 2px;
+      margin-bottom: 1rem;
+      background: var(--gold);
     }
+    .cta-text-block p { font-family: var(--font-sans); color: rgba(248,244,234,0.6); font-size: 1rem; max-width: 480px; margin: 0; }
     .cta-actions {
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
       flex-shrink: 0;
+      padding-left: 2.5rem;
+      border-left: 1px solid rgba(201,151,74,0.3);
     }
     .cta-actions .btn {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-weight: 600;
+      font-family: var(--font-sans);
+      font-weight: 700;
       padding: 0.875rem 2rem;
       white-space: nowrap;
       min-width: 200px;
       text-align: center;
     }
+    .cta-actions .btn-primary { background: var(--gold); border-color: var(--gold); color: var(--emerald-950); }
+    .cta-actions .btn-primary:hover { background: var(--gold-light); border-color: var(--gold-light); }
 
     @media (max-width: 768px) {
-      .cta-inner {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-        text-align: center;
-      }
+      .cta-inner { grid-template-columns: 1fr; gap: 2.5rem; text-align: center; }
       .cta-text-block p { margin: 0 auto; }
-      .cta-actions { flex-direction: row; flex-wrap: wrap; justify-content: center; }
+      .cta-text-block h2::before { margin-left: auto; margin-right: auto; }
+      .cta-actions { flex-direction: row; flex-wrap: wrap; justify-content: center; padding-left: 0; border-left: none; }
     }
 
-    /* ── Footer refinement ── */
-    footer {
-      background: var(--ink);
-      border-top: none;
-      padding: 2.5rem 0;
-    }
-    .footer-inner {
-      gap: 1.25rem;
-    }
-    .footer-brand .brand-name {
-      color: rgba(255,255,255,0.5);
-      font-size: 0.875rem;
-      font-weight: 500;
-    }
-    .footer-nav a {
-      color: rgba(255,255,255,0.3);
-      font-size: 0.82rem;
-    }
-    .footer-nav a:hover { color: var(--gold); }
-    .footer-copy {
-      color: rgba(255,255,255,0.2);
-      font-size: 0.78rem;
-    }
+    /* ── Footer ── */
+    footer { background: var(--emerald-950); border-top: 1px solid rgba(201,151,74,0.3); padding: 2.5rem 0; }
+    .footer-brand img { box-shadow: 0 0 0 2px rgba(201,151,74,0.35); border-radius: 4px; }
+    .footer-inner { gap: 1.25rem; }
+    .footer-brand .brand-name { color: rgba(248,244,234,0.55); font-size: 0.875rem; font-weight: 500; }
+    .footer-nav a { color: rgba(248,244,234,0.32); font-size: 0.82rem; }
+    .footer-nav a:hover { color: var(--gold-light); }
+    .footer-copy { color: rgba(248,244,234,0.22); font-size: 0.78rem; }
   </style>
 </head>
 <body>
@@ -625,22 +663,32 @@
   <main>
     <!-- Hero -->
     <section class="hero">
-      <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <span class="hero-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</span>
-        <h1>Serving Humanity<br />Through <em>Spiritual Care</em></h1>
-        <p class="hero-sub">
-          Empowering Muslims across the United States to become accredited,
-          professional chaplains — answering the call to serve in hospitals,
-          prisons, universities, and beyond.
-        </p>
-        <div class="hero-buttons">
-          <a href="cpe.html" class="btn btn-primary">Learn the CPE Path</a>
-          <a href="about.html" class="btn btn-outline-light">Our Mission</a>
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <span class="hero-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</span>
+          <h1>Serving Humanity<br />Through <em>Spiritual Care</em></h1>
+          <p class="hero-sub">
+            Empowering Muslims across the United States to become accredited,
+            professional chaplains — answering the call to serve in hospitals,
+            prisons, universities, and beyond.
+          </p>
+          <div class="hero-buttons">
+            <a href="cpe.html" class="btn btn-primary">Learn the CPE Path</a>
+            <a href="about.html" class="btn btn-outline-light">Our Mission</a>
+          </div>
+          <p class="hero-credibility">Founded by working chaplains at North Shore University Hospital</p>
         </div>
-        <p class="hero-credibility">Founded by working chaplains at North Shore University Hospital</p>
+        <div class="hero-arch">
+          <div class="hero-arch-outer">
+            <div class="hero-arch-frame">
+              <img
+                src="https://images.unsplash.com/photo-1585036156171-384164a8c675?w=900&auto=format&fit=crop&q=80"
+                alt="Islamic archway architecture" />
+            </div>
+          </div>
+        </div>
       </div>
-      <span class="hero-scroll">Scroll</span>
+      <div class="hero-scallop" aria-hidden="true"></div>
     </section>
 
     <!-- Mission Statement -->
@@ -678,35 +726,35 @@
         <h2>Five Pillars of Our Work</h2>
         <div class="pillars-redesign">
           <div class="pillar-redesign">
-            <span class="pillar-num">1</span>
+            <span class="pillar-num">I</span>
             <div class="pillar-body">
               <h3>Education</h3>
               <p>Accessible pathways into CPE, professional certification, and career guidance — equipping aspiring Muslim chaplains with everything they need to begin and grow.</p>
             </div>
           </div>
           <div class="pillar-redesign">
-            <span class="pillar-num">2</span>
+            <span class="pillar-num">II</span>
             <div class="pillar-body">
               <h3>Mentorship</h3>
               <p>Connecting aspiring chaplains with experienced professionals who offer guidance, encouragement, and practical insight throughout the journey.</p>
             </div>
           </div>
           <div class="pillar-redesign">
-            <span class="pillar-num">3</span>
+            <span class="pillar-num">III</span>
             <div class="pillar-body">
               <h3>Advancement</h3>
               <p>Growing the presence of Muslim chaplains across every institutional setting through targeted education, advocacy, and professional development.</p>
             </div>
           </div>
           <div class="pillar-redesign">
-            <span class="pillar-num">4</span>
+            <span class="pillar-num">IV</span>
             <div class="pillar-body">
               <h3>Community</h3>
               <p>Building a national network so chaplains and CPE students are connected, resourced, and mutually supported wherever they are in the country.</p>
             </div>
           </div>
           <div class="pillar-redesign">
-            <span class="pillar-num">5</span>
+            <span class="pillar-num">V</span>
             <div class="pillar-body">
               <h3>Resources</h3>
               <p>Practical tools, guides, templates, and educational materials that support chaplains, students, institutions, and the broader Muslim community.</p>
@@ -784,6 +832,7 @@
           <a href="team.html" class="btn btn-outline">Read Our Stories &rarr;</a>
         </div>
       </div>
+      <div class="team-scallop" aria-hidden="true"></div>
     </section>
 
     <!-- CTA -->
@@ -809,7 +858,7 @@
   <footer>
     <div class="container footer-inner">
       <div class="footer-brand" style="display:flex;align-items:center;gap:0.75rem;">
-        <img src="images/logo.png" alt="NMCA Logo" style="height:40px;width:40px;object-fit:contain;border-radius:4px;opacity:0.6;">
+        <img src="images/logo.png" alt="NMCA Logo" style="height:40px;width:40px;object-fit:contain;border-radius:4px;opacity:0.85;">
         <div>
           <span class="brand-name">National Muslim Chaplains Association</span>
         </div>
